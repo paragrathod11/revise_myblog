@@ -23,9 +23,10 @@ public class Post {
     @Column(nullable = false, unique = true)
     private String title;
     @Column(nullable = false)
-    private String content;
-    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private String content;
+
 
     @OneToMany(mappedBy = "post",cascade =CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Comment> comment = new HashSet<>();
