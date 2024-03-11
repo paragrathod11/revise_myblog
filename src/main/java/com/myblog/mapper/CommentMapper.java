@@ -2,9 +2,11 @@ package com.myblog.mapper;
 
 import com.myblog.entity.Comment;
 import com.myblog.payload.CommentDto;
+import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+@Api(tags = "Comment Mapper", description = "Provides mapping between Comment and CommentDto")
 @Component
 public class CommentMapper {
 
