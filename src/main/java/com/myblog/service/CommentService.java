@@ -1,2 +1,4 @@
-package com.myblog.service;public interface CommentService {
+package com.myblog.service;
+
+public interface CommentService {
 }

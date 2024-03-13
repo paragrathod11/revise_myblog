@@ -1,2 +1,5 @@
-package com.myblog.service.impl;public interface PostService {
+package com.myblog.service;
+
+public interface PostService {
+
 }
