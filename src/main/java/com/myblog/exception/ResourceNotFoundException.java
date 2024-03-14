@@ -2,14 +2,14 @@ package com.myblog.exception;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class ResourceNotFoundException extends RuntimeException{
 
     private String resourceName;
     private String fieldName;
-    private Long fieldValue;
+    private long fieldValue;
 
-    public ResourceNotFoundException(String resourceName, String fieldName, Long fieldValue) {
+    public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue) {
         super(String.format("%s not found with %s : '%s",resourceName, fieldName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
@@ -17,15 +17,15 @@ public class ResourceNotFoundException extends RuntimeException{
     }
 
     public String getResourceName(){
-        return getResourceName();
+        return resourceName;
     }
 
     public String getFieldName(){
-        return getFieldName();
+        return fieldName;
     }
 
-    public Long getFieldValue(){
-        return getFieldValue();
+    public long getFieldValue(){
+        return fieldValue;
     }
 
 }
