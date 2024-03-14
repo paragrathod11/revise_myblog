@@ -51,6 +51,7 @@ public class PostController {
     @DeleteMapping("/{id}")
     public String deletePostById(@PathVariable long id){
         postService.deletePostById(id);
+        return "Deleted Successfully.";
     }
 
 }
