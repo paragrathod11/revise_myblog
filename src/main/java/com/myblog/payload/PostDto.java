@@ -35,4 +35,10 @@ public class PostDto {
     @ApiModelProperty(value = "Set of comments associated with the post")
     private Set<CommentDto> comments;
 
+    public PostDto(long id, String title, String description, String content) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.content = content;
+    }
 }

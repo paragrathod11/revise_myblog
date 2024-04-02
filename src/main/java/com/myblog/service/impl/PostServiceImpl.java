@@ -7,7 +7,6 @@ import com.myblog.payload.PostDto;
 import com.myblog.payload.PostResponse;
 import com.myblog.repository.PostRepository;
 import com.myblog.service.PostService;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements PostService {
 
-    private PostRepository postRepository;
-    private PostMapper mapper;
+    private final PostRepository postRepository;
+    private final PostMapper mapper;
     public PostServiceImpl(PostRepository postRepository, PostMapper mapper) {
         this.postRepository = postRepository;
         this.mapper = mapper;
@@ -29,13 +28,15 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto createPost(PostDto postDto) {
-
         return mapper.toDto(postRepository.save(mapper.toEntity(postDto)));
     }
 
     @Override
     public PostDto getPostById(long id) {
-        Post getPostById = postRepository.findById(id).get();
+        Post getPostById = postRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("Post", "id", id)
+        );
+
         return mapper.toDto(getPostById);
     }
 
@@ -49,7 +50,11 @@ public class PostServiceImpl implements PostService {
         Page<Post> pagePosts = postRepository.findAll(pageable);
         List<Post> allPosts = pagePosts.getContent();
 
-        List<PostDto> allPostsDto = allPosts.stream().map(x -> mapper.toDto(x)).collect(Collectors.toList());
+        System.out.println("ALL POSTS : "+allPosts);
+
+        //List<PostDto> allPostsDto = allPosts.stream().map(x -> mapper.toDto(x)).collect(Collectors.toList());
+        List<PostDto> allPostsDto = allPosts.stream().map(mapper::toDto).collect(Collectors.toList());
+
 
         PostResponse postResponse = new PostResponse();
                      postResponse.setContent(allPostsDto);

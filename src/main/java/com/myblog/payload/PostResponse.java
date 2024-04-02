@@ -13,8 +13,8 @@ import java.util.List;
 public class PostResponse {
 
     private List<PostDto> content;
-    private long pageNo;
-    private long pageSize;
+    private int pageNo;
+    private int pageSize;
     private long totalElement;
     private long totalPages;
     private boolean last;
