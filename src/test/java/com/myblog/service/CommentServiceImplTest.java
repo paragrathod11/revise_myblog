@@ -150,11 +150,12 @@ public class CommentServiceImplTest {
 
 
 /////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
+///// Helper methods to create entities and DTOs ///////
 ///////////////////////////////////////////////////////
 
     static long post_id = 1L;
     static long comment_id = 1L;
+    
     private final CommentDto commentDto = new CommentDto();
     public CommentDto getCommentDto(){
         commentDto.setId(1L);
