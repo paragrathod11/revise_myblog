@@ -63,7 +63,7 @@ public class PostServiceImplTest {
         when(postRepository.findById(1L)).thenReturn(Optional.of(post));
         when(postMapper.toDto(post)).thenReturn(postDto);
 
-        PostDto retrievePostById = postService.getPostById(1L);
+        PostDto retrievePostById = postService.getPostById(post_id);
 
         assertEquals(postDto, retrievePostById);
     }
@@ -111,12 +111,12 @@ public class PostServiceImplTest {
         Post post = getPost();
         PostDto postDto = getPostDto();
 
-        when(postRepository.findById(1L)).thenReturn(Optional.of(post));
+        when(postRepository.findById(post_id)).thenReturn(Optional.of(post));
         when(postMapper.toEntity(postDto)).thenReturn(post);
         when(postRepository.save(post)).thenReturn(post);
         when(postMapper.toDto(post)).thenReturn(postDto);
 
-        PostDto result = postService.updatePostById(1L, postDto);
+        PostDto result = postService.updatePostById(post_id, postDto);
 
         assertNotNull(result);
         assertEquals(postDto, result);
@@ -127,9 +127,9 @@ public class PostServiceImplTest {
 
         Post post = new Post();
 
-        when(postRepository.findById(1L)).thenReturn(Optional.of(post));
+        when(postRepository.findById(post_id)).thenReturn(Optional.of(post));
 
-        postService.deletePostById(1L);
+        postService.deletePostById(post_id);
 
         verify(postRepository).delete(post);
     }
@@ -138,8 +138,11 @@ public class PostServiceImplTest {
 
 
 /////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
+///// Helper methods to create entities and DTOs ///////
 ///////////////////////////////////////////////////////
+
+    static long post_id = 1L;
+
     private final PostDto postDto = new PostDto();
     public PostDto getPostDto(){
         postDto.setId(1L);

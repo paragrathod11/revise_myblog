@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.lenient;
@@ -28,6 +27,72 @@ public class PostControllerTest {
 
     @InjectMocks
     private PostController postController;
+
+
+
+    @Test
+    public void testSavePost(){
+
+        PostDto postDto1 = getPostDto();
+
+        when(postService.createPost(postDto1)).thenReturn(postDto);
+        // Execute
+        PostDto result = postController.savePost(postDto);
+        // Verify
+        System.out.println(postDto);
+        System.out.println(result);
+        assertEquals(postDto, result);
+
+    }
+
+    @Test
+    public void testGetPostById(){
+
+        PostDto postDto1 = getPostDto();
+        when(postService.getPostById(postDto1.getId())).thenReturn(postDto);
+
+        PostDto fatchedPostDto = postController.getPostById(post_id);
+
+        assertEquals(postDto, fatchedPostDto);
+
+    }
+
+    @Test
+    public void testGetAllPost(){
+
+        PostResponse postResponse = getPostResponse();
+        when(postService.getAllPosts(postResponse.getPageNo(), postResponse.getPageSize(), "id", "asc")).thenReturn(postResponse);
+
+        PostResponse fetchAllPosts = postController.getAllPosts(0, 3, "id", "asc");
+        System.out.println(postResponse);
+        System.out.println(fetchAllPosts);
+        assertEquals(postResponse, fetchAllPosts);
+    }
+
+    @Test
+    public void testUpdatePostById(){
+
+        lenient().when(postService.updatePostById(anyLong(), any(PostDto.class))).thenReturn(postDto);
+
+        PostDto updatedPostDto = postController.updatePostById(post_id, postDto);
+        assertEquals(postDto, updatedPostDto);
+    }
+
+    @Test
+    public void testDeletePostById(){
+
+        String result = postController.deletePostById(post_id);
+
+        assertEquals("Deleted Successfully.", result);
+    }
+
+
+
+/////////////////////////////////////////////////////////
+///// Helper methods to create entities and DTOs ///////
+///////////////////////////////////////////////////////
+
+    static long post_id = 1L;
 
     private final PostDto postDto = new PostDto();
     public PostDto getPostDto() {
@@ -60,67 +125,9 @@ public class PostControllerTest {
         postResponse.setLast(true);
 //        List<PostDto> postDtoList = new ArrayList<>();
 //        postDtoList.add(postDto);
-
+//        postDtoList.add(postDto);
 
         return postResponse;
-    }
-
-    @Test
-    public void testSavePost(){
-
-        PostDto postDto1 = getPostDto();
-
-        when(postService.createPost(postDto1)).thenReturn(postDto);
-        // Execute
-        PostDto result = postController.savePost(postDto);
-        // Verify
-        System.out.println(postDto);
-        System.out.println(result);
-        assertEquals(postDto, result);
-
-    }
-
-    @Test
-    public void testGetPostById(){
-
-        PostDto postDto1 = getPostDto();
-        when(postService.getPostById(postDto1.getId())).thenReturn(postDto);
-
-        PostDto fatchedPostDto = postController.getPostById(1L);
-
-//        System.out.println(postDto);
-//        System.out.println(fatchedPostDto);
-        assertEquals(postDto, fatchedPostDto);
-
-    }
-
-    @Test
-    public void testGetAllPost(){
-
-        PostResponse postResponse = getPostResponse();
-        when(postService.getAllPosts(postResponse.getPageNo(), postResponse.getPageSize(), "id", "asc")).thenReturn(postResponse);
-
-        PostResponse fetchAllPosts = postController.getAllPosts(0, 3, "id", "asc");
-        System.out.println(postResponse);
-        System.out.println(fetchAllPosts);
-        assertEquals(postResponse, fetchAllPosts);
-    }
-
-    @Test
-    public void testUpdatePostById(){
-
-        lenient().when(postService.updatePostById(anyLong(), any(PostDto.class))).thenReturn(postDto);
-
-        PostDto updatedPostDto = postController.updatePostById(1l, postDto);
-        assertEquals(postDto, updatedPostDto);
-    }
-
-    @Test
-    public void testDeletePostById(){
-
-        String result = postController.deletePostById(1L);
-
-        assertEquals("Deleted Successfully.", result);
     }
 
 
