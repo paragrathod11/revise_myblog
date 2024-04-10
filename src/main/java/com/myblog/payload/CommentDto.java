@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 
 @ApiModel(description = "Comment Model Information.")
@@ -32,4 +32,14 @@ public class CommentDto {
     @ApiModelProperty(value = "Content/Body of the comment", example = "This is great post.")
     private String body;
 
+    @ApiModelProperty(value = "Information about the associated post")
+    private PostDto post;
+
+    public CommentDto(long id, String name, String email, String body, PostDto post) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.body = body;
+        this.post = post;
+    }
 }

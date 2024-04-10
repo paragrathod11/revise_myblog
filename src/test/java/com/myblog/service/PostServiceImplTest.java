@@ -35,59 +35,6 @@ public class PostServiceImplTest {
     @InjectMocks
     private PostServiceImpl postService;
 
-    private final PostDto postDto = new PostDto();
-    public PostDto getPostDto(){
-        postDto.setId(1L);
-        postDto.setTitle("Title 1");
-        postDto.setDescription("Test description");
-        postDto.setContent("Test Content.");
-        return postDto;
-    }
-
-    private final Post post = new Post();
-    public Post getPost(){
-        post.setId(1L);
-        post.setTitle("Title 1");
-        post.setDescription("Test description");
-        post.setContent("Test Content.");
-        return post;
-    }
-
-    private final List<PostDto> listPostDto = new ArrayList<>();
-    public List<PostDto> getAllPostDto(){
-        listPostDto.add(new PostDto(1L, "Title 1", "content 1", "Description 1"));
-        listPostDto.add(new PostDto(2L, "Title 2", "content 2", "Description 2"));
-        listPostDto.add(new PostDto(3L, "Title 3", "content 3", "Description 3"));
-        listPostDto.add(new PostDto(1L, "Title 4", "content 4", "Description 4"));
-        listPostDto.add(new PostDto(2L, "Title 5", "content 5", "Description 5"));
-        listPostDto.add(new PostDto(3L, "Title 6", "content 6", "Description 6"));
-        return listPostDto;
-    }
-    private final List<Post> listPost = new ArrayList<>();
-    public List<Post> getAllPost(){
-        listPost.add(new Post(1L, "Title 1", "content 1", "Description 1"));
-        listPost.add(new Post(2L, "Title 2", "content 2", "Description 2"));
-        listPost.add(new Post(3L, "Title 3", "content 3", "Description 3"));
-        listPost.add(new Post(1L, "Title 4", "content 4", "Description 4"));
-        listPost.add(new Post(2L, "Title 5", "content 5", "Description 5"));
-        listPost.add(new Post(3L, "Title 6", "content 6", "Description 6"));
-        return listPost;
-    }
-
-
-    private final PostResponse postResponse = new PostResponse();
-    public  PostResponse getPostResponse(){
-        //postResponse.setContent(Collections.singletonList(postDto));
-        postResponse.setContent(getAllPostDto());
-        postResponse.setPageNo(0);
-        postResponse.setPageSize(6);
-        postResponse.setTotalPages(1);
-        postResponse.setTotalElement(6);
-        postResponse.setLast(true);
-
-        return postResponse;
-    }
-
     @Test
     public void testCreatePost() {
         // Given
@@ -130,7 +77,7 @@ public class PostServiceImplTest {
         String sortBy = "id";
         String sortDir = "asc";
 
-        List<Post> allPosts = getAllPost(); // Assuming you have a method to get all posts
+        List<Post> allPosts = getAllPost();
         Page<Post> pagePosts = new PageImpl<>(allPosts);
         PostResponse expectedResponse = getPostResponse();
 
@@ -185,6 +132,65 @@ public class PostServiceImplTest {
         postService.deletePostById(1L);
 
         verify(postRepository).delete(post);
+    }
+
+
+
+
+/////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+    private final PostDto postDto = new PostDto();
+    public PostDto getPostDto(){
+        postDto.setId(1L);
+        postDto.setTitle("Title 1");
+        postDto.setDescription("Test description");
+        postDto.setContent("Test Content.");
+        return postDto;
+    }
+
+    private final Post post = new Post();
+    public Post getPost(){
+        post.setId(1L);
+        post.setTitle("Title 1");
+        post.setDescription("Test description");
+        post.setContent("Test Content.");
+        return post;
+    }
+
+    private final List<PostDto> listPostDto = new ArrayList<>();
+    public List<PostDto> getAllPostDto(){
+        listPostDto.add(new PostDto(1L, "Title 1", "content 1", "Description 1"));
+        listPostDto.add(new PostDto(2L, "Title 2", "content 2", "Description 2"));
+        listPostDto.add(new PostDto(3L, "Title 3", "content 3", "Description 3"));
+        listPostDto.add(new PostDto(1L, "Title 4", "content 4", "Description 4"));
+        listPostDto.add(new PostDto(2L, "Title 5", "content 5", "Description 5"));
+        listPostDto.add(new PostDto(3L, "Title 6", "content 6", "Description 6"));
+        return listPostDto;
+    }
+    private final List<Post> listPost = new ArrayList<>();
+    public List<Post> getAllPost(){
+        listPost.add(new Post(1L, "Title 1", "content 1", "Description 1"));
+        listPost.add(new Post(2L, "Title 2", "content 2", "Description 2"));
+        listPost.add(new Post(3L, "Title 3", "content 3", "Description 3"));
+        listPost.add(new Post(1L, "Title 4", "content 4", "Description 4"));
+        listPost.add(new Post(2L, "Title 5", "content 5", "Description 5"));
+        listPost.add(new Post(3L, "Title 6", "content 6", "Description 6"));
+        return listPost;
+    }
+
+
+    private final PostResponse postResponse = new PostResponse();
+    public  PostResponse getPostResponse(){
+        //postResponse.setContent(Collections.singletonList(postDto));
+        postResponse.setContent(getAllPostDto());
+        postResponse.setPageNo(0);
+        postResponse.setPageSize(6);
+        postResponse.setTotalPages(1);
+        postResponse.setTotalElement(6);
+        postResponse.setLast(true);
+
+        return postResponse;
     }
 
 }

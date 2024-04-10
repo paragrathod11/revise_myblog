@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
@@ -28,5 +27,18 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
+//    public Comment(long id, String name, String email, String body) {
+//        this.id = id;
+//        this.name = name;
+//        this.email = email;
+//        this.body = body;
+//    }
 
+    public Comment(long id, String name, String email, String body, Post post) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.body = body;
+        this.post = post;
+    }
 }

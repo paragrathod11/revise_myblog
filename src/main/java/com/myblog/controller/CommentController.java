@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.yaml.snakeyaml.tokens.CommentToken;
@@ -31,8 +33,8 @@ public class CommentController {
             @ApiResponse(code = 201, message = "Successfully created a new Comment"),
             @ApiResponse(code = 400, message = "Bad Request, Validation error in the request body.")
     })
-    public ResponseEntity<CommentDto> createComment(@PathVariable("post_id") long post_id, @Valid @RequestBody CommentDto commentDto){
-        return ResponseEntity.ok().body(commentService.createComment(post_id, commentDto));
+    public ResponseEntity<CommentDto> createComment(@PathVariable("post_id") long post_id, @Valid @NotNull @RequestBody CommentDto commentDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(commentService.createComment(post_id, commentDto));
     }
 
 
@@ -86,10 +88,10 @@ public class CommentController {
     public ResponseEntity<CommentDto> editPostCommentByCommentId(
             @PathVariable("post_id") long post_id,
             @PathVariable("comment_id") long comment_id,
-            @Valid @RequestBody CommentDto commentDto
+            @Valid @NotNull @RequestBody CommentDto commentDto
     ){
         CommentDto updatedComment = commentService.editPostCommentByCommentId(post_id, comment_id, commentDto);
-        return ResponseEntity.ok().body(updatedComment);
+        return ResponseEntity.status(HttpStatus.CREATED).body(updatedComment);
     }
 
     @DeleteMapping("{post_id}/comments/{comment_id}")
