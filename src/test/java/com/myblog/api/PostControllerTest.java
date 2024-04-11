@@ -108,9 +108,9 @@ public class PostControllerTest {
         listPostDto.add(new PostDto(1L, "Title 1", "content 1", "Description 1"));
         listPostDto.add(new PostDto(2L, "Title 2", "content 2", "Description 2"));
         listPostDto.add(new PostDto(3L, "Title 3", "content 3", "Description 3"));
-        listPostDto.add(new PostDto(1L, "Title 4", "content 4", "Description 4"));
-        listPostDto.add(new PostDto(2L, "Title 5", "content 5", "Description 5"));
-        listPostDto.add(new PostDto(3L, "Title 6", "content 6", "Description 6"));
+        listPostDto.add(new PostDto(4L, "Title 4", "content 4", "Description 4"));
+        listPostDto.add(new PostDto(5L, "Title 5", "content 5", "Description 5"));
+        listPostDto.add(new PostDto(6L, "Title 6", "content 6", "Description 6"));
         return listPostDto;
     }
 

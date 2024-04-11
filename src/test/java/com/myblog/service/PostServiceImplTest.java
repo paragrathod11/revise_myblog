@@ -166,9 +166,9 @@ public class PostServiceImplTest {
         listPostDto.add(new PostDto(1L, "Title 1", "content 1", "Description 1"));
         listPostDto.add(new PostDto(2L, "Title 2", "content 2", "Description 2"));
         listPostDto.add(new PostDto(3L, "Title 3", "content 3", "Description 3"));
-        listPostDto.add(new PostDto(1L, "Title 4", "content 4", "Description 4"));
-        listPostDto.add(new PostDto(2L, "Title 5", "content 5", "Description 5"));
-        listPostDto.add(new PostDto(3L, "Title 6", "content 6", "Description 6"));
+        listPostDto.add(new PostDto(4L, "Title 4", "content 4", "Description 4"));
+        listPostDto.add(new PostDto(5L, "Title 5", "content 5", "Description 5"));
+        listPostDto.add(new PostDto(6L, "Title 6", "content 6", "Description 6"));
         return listPostDto;
     }
     private final List<Post> listPost = new ArrayList<>();
@@ -176,9 +176,9 @@ public class PostServiceImplTest {
         listPost.add(new Post(1L, "Title 1", "content 1", "Description 1"));
         listPost.add(new Post(2L, "Title 2", "content 2", "Description 2"));
         listPost.add(new Post(3L, "Title 3", "content 3", "Description 3"));
-        listPost.add(new Post(1L, "Title 4", "content 4", "Description 4"));
-        listPost.add(new Post(2L, "Title 5", "content 5", "Description 5"));
-        listPost.add(new Post(3L, "Title 6", "content 6", "Description 6"));
+        listPost.add(new Post(4L, "Title 4", "content 4", "Description 4"));
+        listPost.add(new Post(5L, "Title 5", "content 5", "Description 5"));
+        listPost.add(new Post(6L, "Title 6", "content 6", "Description 6"));
         return listPost;
     }
 
@@ -188,7 +188,7 @@ public class PostServiceImplTest {
         //postResponse.setContent(Collections.singletonList(postDto));
         postResponse.setContent(getAllPostDto());
         postResponse.setPageNo(0);
-        postResponse.setPageSize(6);
+        postResponse.setPageSize(3);
         postResponse.setTotalPages(1);
         postResponse.setTotalElement(6);
         postResponse.setLast(true);
